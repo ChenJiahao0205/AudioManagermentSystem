@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pers.chenjiahao.audiomgs.mapper.LeaseMapper">
+  <resultMap id="BaseResultMap" type="pers.chenjiahao.audiomgs.entity.Lease">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="audio_id" jdbcType="BIGINT" property="audioId" />
+    <result column="audio_name" jdbcType="VARCHAR" property="audioName" />
+    <result column="deposit" jdbcType="DOUBLE" property="deposit" />
+    <result column="start_rent_date" jdbcType="TIMESTAMP" property="startRentDate" />
+    <result column="end_rent_date" jdbcType="TIMESTAMP" property="endRentDate" />
+    <result column="rent" jdbcType="DOUBLE" property="rent" />
+    <result column="return_rent" jdbcType="DOUBLE" property="returnRent" />
+    <result column="lease_status" jdbcType="VARCHAR" property="leaseStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, username, real_name, audio_id, audio_name, deposit, start_rent_date, end_rent_date, 
+    rent, return_rent, lease_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from lease
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from lease
+  </select>
+  <select id="selectByUsername" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from lease
+    where username = #{username}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from lease
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="pers.chenjiahao.audiomgs.entity.Lease">
+    insert into lease (id, username, real_name, 
+      audio_id, audio_name, deposit, 
+      start_rent_date, end_rent_date, rent, 
+      return_rent, lease_status)
+    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, 
+      #{audioId,jdbcType=BIGINT}, #{audioName,jdbcType=VARCHAR}, #{deposit,jdbcType=DOUBLE}, 
+      #{startRentDate,jdbcType=TIMESTAMP}, #{endRentDate,jdbcType=TIMESTAMP}, #{rent,jdbcType=DOUBLE}, 
+      #{returnRent,jdbcType=DOUBLE}, #{leaseStatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pers.chenjiahao.audiomgs.entity.Lease">
+    insert into lease
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="realName != null">
+        real_name,
+      </if>
+      <if test="audioId != null">
+        audio_id,
+      </if>
+      <if test="audioName != null">
+        audio_name,
+      </if>
+      <if test="deposit != null">
+        deposit,
+      </if>
+      <if test="startRentDate != null">
+        start_rent_date,
+      </if>
+      <if test="endRentDate != null">
+        end_rent_date,
+      </if>
+      <if test="rent != null">
+        rent,
+      </if>
+      <if test="returnRent != null">
+        return_rent,
+      </if>
+      <if test="leaseStatus != null">
+        lease_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="audioId != null">
+        #{audioId,jdbcType=BIGINT},
+      </if>
+      <if test="audioName != null">
+        #{audioName,jdbcType=VARCHAR},
+      </if>
+      <if test="deposit != null">
+        #{deposit,jdbcType=DOUBLE},
+      </if>
+      <if test="startRentDate != null">
+        #{startRentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endRentDate != null">
+        #{endRentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rent != null">
+        #{rent,jdbcType=DOUBLE},
+      </if>
+      <if test="returnRent != null">
+        #{returnRent,jdbcType=DOUBLE},
+      </if>
+      <if test="leaseStatus != null">
+        #{leaseStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="pers.chenjiahao.audiomgs.entity.Lease">
+    update lease
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="audioId != null">
+        audio_id = #{audioId,jdbcType=BIGINT},
+      </if>
+      <if test="audioName != null">
+        audio_name = #{audioName,jdbcType=VARCHAR},
+      </if>
+      <if test="deposit != null">
+        deposit = #{deposit,jdbcType=DOUBLE},
+      </if>
+      <if test="startRentDate != null">
+        start_rent_date = #{startRentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endRentDate != null">
+        end_rent_date = #{endRentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rent != null">
+        rent = #{rent,jdbcType=DOUBLE},
+      </if>
+      <if test="returnRent != null">
+        return_rent = #{returnRent,jdbcType=DOUBLE},
+      </if>
+      <if test="leaseStatus != null">
+        lease_status = #{leaseStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pers.chenjiahao.audiomgs.entity.Lease">
+    update lease
+    set username = #{username,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      audio_id = #{audioId,jdbcType=BIGINT},
+      audio_name = #{audioName,jdbcType=VARCHAR},
+      deposit = #{deposit,jdbcType=DOUBLE},
+      start_rent_date = #{startRentDate,jdbcType=TIMESTAMP},
+      end_rent_date = #{endRentDate,jdbcType=TIMESTAMP},
+      rent = #{rent,jdbcType=DOUBLE},
+      return_rent = #{returnRent,jdbcType=DOUBLE},
+      lease_status = #{leaseStatus,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
